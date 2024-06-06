@@ -1,0 +1,3 @@
+# Ignore env file
+.env
+get_access_token.py

@@ -1,0 +1,5 @@
+tweepy
+pysurfline
+dotenv
+pandas
+requests_oauthlib
