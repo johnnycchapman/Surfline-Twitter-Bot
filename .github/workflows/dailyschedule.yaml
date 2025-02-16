@@ -2,9 +2,7 @@ name: Daily Tweet
 
 on:
   schedule:
-  timezone: "America/New_York"
-    - cron: '0 12 * * *'  # 8 AM New York time
-  # Allows you to run this workflow manually from the Actions tab
+    - cron: '0 13 * * *'  # 8 AM EST (13:00 UTC)
   workflow_dispatch:
 
 jobs:
@@ -32,7 +30,6 @@ jobs:
       env:
         CONSUMER_KEY: ${{ secrets.CONSUMER_KEY }}
         CONSUMER_SECRET: ${{ secrets.CONSUMER_SECRET }}
-        BEARER_TOKEN: ${{ secrets.BEARER_TOKEN }}
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
       run: python post_tweet.py 2>&1 | tee -a logs/tweet.log

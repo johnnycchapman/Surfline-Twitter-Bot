@@ -1,5 +1,5 @@
 tweepy
 pysurfline
-dotenv
+python-dotenv
 pandas
-requests_oauthlib
+requests
