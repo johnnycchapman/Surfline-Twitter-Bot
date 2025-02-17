@@ -2,12 +2,13 @@ name: Daily Tweet
 
 on:
   schedule:
-    - cron: '0 13 * * *'  # 8 AM EST (13:00 UTC)
+    - cron: '30 15 * * *'  # 10:30 AM EST (15:30 UTC)
   workflow_dispatch:
 
 jobs:
   tweet:
     runs-on: ubuntu-latest
+    timeout-minutes: 10  # ✅ Correct placement
 
     steps:
     - name: Checkout repository
@@ -46,7 +47,3 @@ defaults:
   run:
     shell: bash
     working-directory: .
-    timeout-minutes: 10
-
-env:
-  TZ: America/New_York
