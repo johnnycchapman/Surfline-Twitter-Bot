@@ -2,7 +2,7 @@ name: Daily Tweet
 
 on:
   schedule:
-    - cron: '0 13 * * *'  # 8:00 AM EST (15:30 UTC)
+    - cron: '0 14 * * *'  # 9:00 AM EST (15:30 UTC)
   workflow_dispatch:
 
 jobs:
@@ -17,15 +17,15 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.10'  # ✅ Downgrade to Python 3.10
+        python-version: '3.10'  # ✅ Ensures compatibility
 
     - name: Create log directory
       run: mkdir -p logs
 
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip 2>&1 | tee -a logs/install.log
-        pip install -r requirements.txt 2>&1 | tee -a logs/install.log
+        python -m pip install --upgrade pip | tee -a logs/install.log
+        pip install -r requirements.txt | tee -a logs/install.log
 
     - name: Run tweet script
       env:
@@ -33,7 +33,11 @@ jobs:
         CONSUMER_SECRET: ${{ secrets.CONSUMER_SECRET }}
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
-      run: python post_tweet.py 2>&1 | tee -a logs/tweet.log
+      run: python post_tweet.py | tee -a logs/tweet.log
+
+    - name: Print logs for debugging
+      if: always()
+      run: cat logs/*.log || true  # ✅ Prints logs to GitHub Actions UI
 
     - name: Log success
       if: success()
@@ -42,8 +46,3 @@ jobs:
     - name: Log failure
       if: failure()
       run: echo "Workflow failed on $(date)" >> logs/failure.log
-
-defaults:
-  run:
-    shell: bash
-    working-directory: .
