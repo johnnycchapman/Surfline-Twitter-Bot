@@ -2,7 +2,7 @@ name: Daily Tweet
 
 on:
   schedule:
-    - cron: '0 14 * * *'  # 9:00 AM EST (15:30 UTC)
+    - cron: '30 16 * * *'  # 11:30 PM EST (15:30 UTC)
   workflow_dispatch:
 
 jobs:
