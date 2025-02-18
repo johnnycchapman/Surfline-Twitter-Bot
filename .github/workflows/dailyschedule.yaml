@@ -24,13 +24,13 @@ jobs:
 
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip setuptools wheel | tee -a logs/install.log
-        pip install --no-cache-dir -r requirements.txt | tee -a logs/install.log
-        pip install --no-cache-dir tweepy | tee -a logs/install.log  # ✅ Force-install tweepy separately
+        python3 -m pip3 install --upgrade pip setuptools wheel | tee -a logs/install.log
+        pip3 install --no-cache-dir -r requirements.txt | tee -a logs/install.log
+        pip3 install --no-cache-dir tweepy | tee -a logs/install.log  # ✅ Force-install tweepy separately
 
     - name: Check Installed Packages
       run: | 
-        pip list | tee -a logs/install.log
+        pip3 list | tee -a logs/install.log
 
     - name: Run tweet script
       env:
@@ -38,7 +38,7 @@ jobs:
         CONSUMER_SECRET: ${{ secrets.CONSUMER_SECRET }}
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
         ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
-      run: python post_tweet.py | tee -a logs/tweet.log
+      run: python3 post_tweet.py | tee -a logs/tweet.log
 
     - name: Print logs for debugging
       if: always()
