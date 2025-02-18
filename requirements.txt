@@ -1,5 +1,5 @@
 tweepy
-pysurfline
+git+https://github.com/surfline/pysurfline.git
 python-dotenv
 pandas
 requests
