@@ -2,7 +2,7 @@ name: Daily Tweet
 
 on:
   schedule:
-    - cron: '30 16 * * *'  # 11:30 PM EST (15:30 UTC)
+    - cron: '0 00 * * *'  # 11:30 PM EST (15:30 UTC)
   workflow_dispatch:
 
 jobs:
@@ -26,8 +26,8 @@ jobs:
       run: |
         python3 -m pip install --upgrade pip setuptools wheel | tee -a logs/install.log
         python3 -m pip install --no-cache-dir -r requirements.txt | tee -a logs/install.log
-        python3 -m pip install --no-cache-dir tweepy | tee -a logs/install.log  # ✅ Ensure tweepy is installed
-        python3 -m pip list | grep tweepy  # ✅ Verify tweepy was installed
+        python3 -m pip install --no-cache-dir git+https://github.com/surfline/pysurfline.git | tee -a logs/install.log  # ✅ Force install from GitHub
+        python3 -m pip list | tee -a logs/install.log  # ✅ Print installed packages
 
     - name: Check Installed Packages
       run: | 
